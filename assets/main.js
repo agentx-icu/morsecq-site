@@ -3,32 +3,16 @@
 
   var root = document.documentElement;
   var REPO = 'agentx-icu/morsecq';
-  var lastRel = null;
 
   // ---------------------------------------------------------------- language
-  function lang() { return root.getAttribute('data-lang') === 'zh' ? 'zh' : 'en'; }
+  function lang() { return /^zh/i.test(root.lang) ? 'zh' : 'en'; }
 
-  function applyLang(l) {
-    root.setAttribute('data-lang', l);
-    root.lang = l === 'zh' ? 'zh-CN' : 'en';
-    document.querySelectorAll('img[data-i18n-src]').forEach(function (img) {
-      img.src = img.getAttribute('src').replace(/\/(en|zh)\//, '/' + l + '/');
+  // Each language is its own page (/en/, /zh/); remember the choice so the
+  // root URL sends the visitor back to it next time.
+  document.querySelectorAll('[data-set-lang]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      try { localStorage.setItem('morsecq-lang', a.getAttribute('data-set-lang')); } catch (e) {}
     });
-    // Attribute text cannot use the paired-span trick; keep the English in data-*-en.
-    [['alt', 'data-alt'], ['aria-label', 'data-label']].forEach(function (p) {
-      document.querySelectorAll('[' + p[1] + '-zh]').forEach(function (el) {
-        if (!el.hasAttribute(p[1] + '-en')) el.setAttribute(p[1] + '-en', el.getAttribute(p[0]));
-        el.setAttribute(p[0], el.getAttribute(p[1] + '-' + l));
-      });
-    });
-    markMine();
-    if (lastRel) applyRelease(lastRel);
-  }
-
-  document.getElementById('langBtn').addEventListener('click', function () {
-    var l = lang() === 'zh' ? 'en' : 'zh';
-    try { localStorage.setItem('morsecq-lang', l); } catch (e) {}
-    applyLang(l);
   });
 
   // ---------------------------------------------------------------- platform
@@ -55,7 +39,7 @@
     card.classList.add('mine');
     card.setAttribute('data-mine', lang() === 'zh' ? '适合你的设备' : 'Your device');
     var label = document.getElementById('heroDlLabel');
-    label.innerHTML = '<span lang="en">Download for ' + OS_NAME[OS] + '</span><span lang="zh">下载 ' + OS_NAME[OS] + ' 版</span>';
+    label.textContent = lang() === 'zh' ? '下载 ' + OS_NAME[OS] + ' 版' : 'Download for ' + OS_NAME[OS];
   }
 
   // ---------------------------------------------------------------- releases
@@ -64,7 +48,6 @@
   }
 
   function applyRelease(rel) {
-    lastRel = rel;
     var tag = rel.tag_name;
     document.getElementById('relName').textContent = tag + (rel.prerelease ? (lang() === 'zh' ? '（预发布）' : ' (pre-release)') : '');
     document.getElementById('relLink').href = rel.html_url;
@@ -246,5 +229,5 @@
   hz.addEventListener('input', function () { document.getElementById('hzV').textContent = hz.value; });
 
   render();
-  applyLang(lang());
+  markMine();
 })();
