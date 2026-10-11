@@ -28,7 +28,7 @@ bilingual source into the two pages. Morse chat is provided by DitMesh.
 
 The download buttons in `src/index.html` point at the current stable release (v1.0.1) so they work without JavaScript. On load, `main.js` asks the GitHub API
 for the newest non-draft release of `agentx-icu/morsecq` and rewrites each
-button whose `data-asset` suffix (`macos-arm64.pkg`, `windows-x64.msi`,
+button whose `data-asset` suffix (`macos-universal2.pkg`, `windows-x64.msi`,
 `linux-x86_64.deb`, `android.apk`, `ios-unsigned.ipa`, …) matches an asset name,
 adding the file size. When a release changes its asset naming, update the
 `data-asset` attributes and fallback URLs. MorseCQ v1.0.1 ships a macOS universal2 package for Apple silicon and Intel.
