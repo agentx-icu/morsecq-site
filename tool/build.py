@@ -21,22 +21,20 @@ ROOT = Path(__file__).resolve().parent.parent
 LANGS = {
     'en': {
         'html_lang': 'en',
-        'title': 'MorseCQ — Talk in Morse code',
-        'description': 'MorseCQ is a free Morse code trainer and a serverless, peer-to-peer '
-                       'Morse chat on the Tox network. Learn with Koch lessons and keying '
-                       'drills, then key it to real people. macOS, Windows, Linux, Android and iOS.',
-        'og_description': 'Morse code trainer and serverless peer-to-peer Morse chat. '
-                          'Free and open source (GPL-3.0).',
+        'title': 'MorseCQ — Learn Morse code offline',
+        'description': 'MorseCQ is a free, account-free, offline Morse code trainer. '
+                       'Learn with Koch lessons, receive drills and sending practice. '
+                       'macOS, Windows, Linux, Android and iOS.',
+        'og_description': 'Account-free, offline Morse code trainer. Free and open source (GPL-3.0).',
         'og_locale': 'en_US',
         'switch': ('zh', 'zh-CN', '中文', '切换到中文'),
     },
     'zh': {
         'html_lang': 'zh-CN',
-        'title': 'MorseCQ — 用摩尔斯电码聊天',
-        'description': 'MorseCQ 是免费的摩尔斯电码训练器，也是基于 Tox 网络、无需服务器的点对点'
-                       '摩尔斯聊天工具。用 Koch 课程和拍发练习学会电码，再拍发给真实的人。'
+        'title': 'MorseCQ — 离线学习摩尔斯电码',
+        'description': 'MorseCQ 是无需账号、无需联网的免费摩尔斯电码训练器。用 Koch 课程、抄收练习和拍发练习学习电码。'
                        '支持 macOS、Windows、Linux、Android 和 iOS。',
-        'og_description': '摩尔斯电码训练器 + 无中心服务器的点对点摩尔斯聊天。免费开源（GPL-3.0）。',
+        'og_description': '无需账号、无需联网的摩尔斯电码训练器。免费开源（GPL-3.0）。',
         'og_locale': 'zh_CN',
         'switch': ('en', 'en', 'EN', 'Switch to English'),
     },

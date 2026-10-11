@@ -1,7 +1,7 @@
 # morsecq-site
 
-Official website of [MorseCQ](https://github.com/agentx-icu/morsecq) — a Morse
-code trainer and serverless peer-to-peer Morse chat — served at
+Official website of [MorseCQ](https://github.com/agentx-icu/morsecq) — an account-free,
+offline Morse code trainer — served at
 **https://morsecq.agentx.icu**.
 
 A static site in two languages, each its own page:
@@ -12,7 +12,7 @@ A static site in two languages, each its own page:
   last choice, then the browser language
 
 No framework and no external fonts or scripts; a small Python script splits the
-bilingual source into the two pages.
+bilingual source into the two pages. Morse chat is provided by DitMesh.
 
 | Path | What |
 |------|------|
@@ -26,13 +26,12 @@ bilingual source into the two pages.
 
 ## Downloads
 
-The download buttons in `src/index.html` point at a fixed release (currently
-v0.1.1) so they work without JavaScript. On load, `main.js` asks the GitHub API
+The download buttons in `src/index.html` point at the current stable release (v1.0.1) so they work without JavaScript. On load, `main.js` asks the GitHub API
 for the newest non-draft release of `agentx-icu/morsecq` and rewrites each
 button whose `data-asset` suffix (`macos-arm64.pkg`, `windows-x64.msi`,
 `linux-x86_64.deb`, `android.apk`, `ios-unsigned.ipa`, …) matches an asset name,
 adding the file size. When a release changes its asset naming, update the
-`data-asset` attributes; bump the fallback URLs from time to time.
+`data-asset` attributes and fallback URLs. MorseCQ v1.0.1 ships a macOS universal2 package for Apple silicon and Intel.
 
 ## Preview locally
 
@@ -46,10 +45,10 @@ python3 tool/build.py && (cd _site && python3 -m http.server 8000)
 ```bash
 S=../morsecq/doc/screenshots
 for l in en zh; do
-  for s in learn_home conversation stats listen reference group_conversation; do
+  for s in learn_home stats listen reference; do
     sips -s format jpeg -s formatOptions 82 $S/macos/$l/$s.png --out assets/img/$l/desktop-$s.jpg
   done
-  for s in receive_drill send_practice group_conversation translator conversation stats listen chat_list; do
+  for s in receive_drill send_practice translator stats listen; do
     sips -Z 900 -s format jpeg -s formatOptions 82 $S/ios/$l/$s.png --out assets/img/$l/phone-$s.jpg
   done
 done
