@@ -145,6 +145,7 @@ def render(src, lang):
 
     # Pages live one level down.
     out = re.sub(r'(href|src)="assets/', r'\1="../assets/', out)
+    out = re.sub(r'href="(en|zh)/"', r'href="../\1/"', out)
     return out
 
 
