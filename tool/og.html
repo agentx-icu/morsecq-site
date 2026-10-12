@@ -1,0 +1,49 @@
+<!doctype html>
+<!-- Social preview template, rendered to assets/img/{en,zh}/og.jpg at 1200x630.
+     Open as tool/og.html?lang=en or ?lang=zh; see README "Social preview". -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #13261f; display: grid; grid-template-columns: 1fr 420px; align-items: center;
+    background:
+      radial-gradient(700px 420px at 90% 0%, rgba(19, 122, 99, .22), transparent 70%),
+      radial-gradient(600px 400px at 0% 100%, rgba(30, 58, 95, .14), transparent 70%),
+      #f6f8f7;
+  }
+  .copy { padding: 0 40px 0 80px; }
+  .brand { display: flex; align-items: center; gap: 18px; font-size: 40px; font-weight: 800; }
+  .brand img { width: 72px; height: 72px; border-radius: 16px; }
+  .morse { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #137a63; font-size: 26px; letter-spacing: .14em; margin: 34px 0 10px; }
+  h1 { font-size: 64px; line-height: 1.08; margin: 0; font-weight: 800; letter-spacing: -.01em; }
+  h1 em { font-style: normal; color: #137a63; }
+  p { font-size: 26px; color: #4a5e57; margin: 22px 0 0; line-height: 1.45; }
+  .url { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 22px; color: #0e6150; margin-top: 30px; }
+  .phone { justify-self: start; align-self: start; margin-top: 64px; width: 330px; border: 12px solid #13261f; border-radius: 44px; overflow: hidden;
+           box-shadow: 0 30px 60px rgba(19, 38, 31, .28); background: #fff; }
+  .phone img { display: block; width: 100%; }
+  [data-l] { display: none; }
+  html[data-lang="en"] [data-l="en"], html[data-lang="zh"] [data-l="zh"] { display: revert; }
+</style>
+</head>
+<body>
+  <div class="copy">
+    <div class="brand"><img src="../assets/img/icon-512.png" alt="">MorseCQ</div>
+    <div class="morse">-.-. --.-  -.-. --.-</div>
+    <h1 data-l="en">Learn Morse code <em>offline.</em></h1>
+    <h1 data-l="zh">离线学习<em>摩尔斯电码</em></h1>
+    <p data-l="en">Free, open source, no account.<br>macOS · Windows · Linux · Android · iOS</p>
+    <p data-l="zh">免费开源，无需账号。<br>macOS · Windows · Linux · Android · iOS</p>
+    <div class="url">morsecq.agentx.icu</div>
+  </div>
+  <div class="phone"><img id="shot" alt=""></div>
+  <script>
+    var l = /[?&]lang=zh\b/.test(location.search) ? 'zh' : 'en';
+    document.documentElement.setAttribute('data-lang', l);
+    document.getElementById('shot').src = '../assets/img/' + l + '/phone-reference.jpg';
+  </script>
+</body>
+</html>

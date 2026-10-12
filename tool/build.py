@@ -11,6 +11,7 @@ links. The root /index.html only redirects to the visitor's language.
 Usage: python3 tool/build.py [--out _site]
 """
 import argparse
+import json
 import re
 import shutil
 from pathlib import Path
@@ -134,8 +135,32 @@ def render(src, lang):
     out = sub1(r'<meta property="og:description" content="[^"]*">',
                f'<meta property="og:description" content="{attr(cfg["og_description"])}">', out)
     out = sub1(r'<meta property="og:url" content="[^"]*">', f'<meta property="og:url" content="{url}">', out)
-    out = sub1(r'assets/img/en/desktop-learn_home\.jpg">\n<meta name="twitter',
-               f'assets/img/{lang}/desktop-learn_home.jpg">\n<meta name="twitter', out)
+    out = sub1(r'assets/img/en/og\.jpg">', f'assets/img/{lang}/og.jpg">', out)
+
+    # Structured data for search engines; the version is the page's static fallback.
+    version = re.search(r'<span data-version>v([^<]+)</span>', src)
+    if not version:
+        raise SystemExit('build: no <span data-version> in the source page')
+    ld = {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'MorseCQ',
+        'url': url,
+        'inLanguage': cfg['html_lang'],
+        'description': cfg['description'],
+        'applicationCategory': 'EducationalApplication',
+        'operatingSystem': 'macOS, Windows, Linux, Android, iOS',
+        'softwareVersion': version.group(1),
+        'license': 'https://www.gnu.org/licenses/gpl-3.0.html',
+        'downloadUrl': f'{url}#download',
+        'image': f'{SITE}/assets/img/icon-512.png',
+        'screenshot': f'{SITE}/assets/img/{lang}/desktop-learn_home.jpg',
+        'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'USD'},
+        'author': {'@type': 'Organization', 'name': 'agentx-icu', 'url': 'https://github.com/agentx-icu'},
+    }
+    ld_json = json.dumps(ld, ensure_ascii=False, indent=2).replace('</', '<\\/')
+    ld_tag = f'<script type="application/ld+json">\n{ld_json}\n</script>\n</head>'
+    out = sub1(r'</head>', lambda m: ld_tag, out)
 
     # The language toggle becomes a link to the other page.
     to, to_hreflang, label, title = cfg['switch']
@@ -182,6 +207,51 @@ ROOT_PAGE = """<!doctype html>
 </html>
 """
 
+# GitHub Pages serves this for every missing path, at any depth, so it links
+# with absolute URLs and does not depend on the site stylesheet.
+NOT_FOUND = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — MorseCQ</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="/assets/img/favicon-64.png">
+<style>
+  body {{ font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+         background: #f6f8f7; color: #13261f; display: grid; place-items: center; min-height: 100vh; margin: 0; padding: 24px;
+         box-sizing: border-box; text-align: center; }}
+  .m {{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #137a63; letter-spacing: .12em; margin: 0; }}
+  h1 {{ font-size: 1.6rem; margin: 12px 0 4px; }}
+  p {{ margin: 0 0 10px; color: #4a5e57; }}
+  nav {{ margin-top: 14px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }}
+  a {{ color: #0e6150; font-weight: 600; border: 1px solid #c9d6d1; border-radius: 999px; padding: 10px 18px; text-decoration: none; }}
+  a:hover {{ border-color: #137a63; }}
+  @media (prefers-color-scheme: dark) {{
+    body {{ background: #0e1513; color: #e3ece8; }} p {{ color: #9fb3ab; }} .m {{ color: #5fd0ad; }}
+    a {{ color: #5fd0ad; border-color: #2a3a35; }}
+  }}
+</style>
+</head>
+<body>
+<main>
+  <img src="/assets/img/icon-512.png" alt="" width="64" height="64" style="border-radius:14px">
+  <p class="m">....- ----- ....-</p>
+  <h1>404 · Page not found</h1>
+  <p lang="zh-CN">找不到这个页面</p>
+  <nav>
+    <a href="/en/" hreflang="en">MorseCQ home</a>
+    <a href="/en/#download" hreflang="en">Download</a>
+  </nav>
+  <nav lang="zh-CN">
+    <a href="/zh/" hreflang="zh-CN">MorseCQ 首页</a>
+    <a href="/zh/#download" hreflang="zh-CN">下载</a>
+  </nav>
+</main>
+</body>
+</html>
+"""
+
 SITEMAP = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 {urls}
@@ -208,6 +278,7 @@ def main():
         (out / lang).mkdir(parents=True)
         (out / lang / 'index.html').write_text(render(src, lang), encoding='utf-8', newline='\n')
     (out / 'index.html').write_text(ROOT_PAGE.format(site=SITE), encoding='utf-8', newline='\n')
+    (out / '404.html').write_text(NOT_FOUND.format(), encoding='utf-8', newline='\n')
     (out / 'sitemap.xml').write_text(sitemap(), encoding='utf-8', newline='\n')
     (out / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n', encoding='utf-8')
     for f in ('CNAME', '.nojekyll'):

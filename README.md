@@ -17,12 +17,15 @@ bilingual source into the two pages. Morse chat is provided by DitMesh.
 | Path | What |
 |------|------|
 | `src/index.html` | The page source. Every string appears twice, `<span lang="en">` and `<span lang="zh">`; attribute text has a `data-alt-zh` / `data-label-zh` twin. Edit both languages here. |
-| `tool/build.py` | Writes `_site/`: `en/index.html` and `zh/index.html` (one language each, with their own `<html lang>`, title, description, canonical and hreflang links), the root redirect, `sitemap.xml`, `robots.txt` and the assets. Fails loudly if the template drifts. |
+| `tool/build.py` | Writes `_site/`: `en/index.html` and `zh/index.html` (one language each, with their own `<html lang>`, title, description, canonical and hreflang links), a `SoftwareApplication` JSON-LD block per page, the root redirect, a bilingual `404.html`, `sitemap.xml`, `robots.txt` and the assets. Fails loudly if the template drifts. |
+| `tool/check_release.py` | Fails when the static release fallback in `src/index.html` (version, date, links, file names, sizes, SHA-256 list) no longer matches the latest release. |
+| `tool/og.html` | Template for the 1200×630 social preview images `assets/img/{en,zh}/og.jpg`. |
 | `assets/style.css` | Styles, light and dark (follows the system). |
-| `assets/main.js` | OS detection (hero download button, "your device" card, install-guide tab), live release lookup, the in-browser Morse player, tabs, copy buttons on install commands, and remembering the language picked with the switch. |
+| `assets/main.js` | The phone menu, the full-size screenshot viewer, OS detection (hero download button, "your device" card, install-guide tab), live release lookup, the in-browser Morse player, tabs, copy buttons on install commands, and remembering the language picked with the switch. |
 | `assets/img/{en,zh}/` | MorseCQ 1.0.1 screenshots copied from `morsecq/doc/screenshots/{macos,ios}/<lang>/` (JPEG, phones scaled to 900 px). |
 | `CNAME` | Custom domain for GitHub Pages. |
 | `.github/workflows/pages.yml` | Runs `tool/build.py` and deploys `_site/` to GitHub Pages on every push to `master`. |
+| `.github/workflows/check.yml` | Builds the site and runs `tool/check_release.py` on pushes, pull requests and daily, so a new MorseCQ release the page has not caught up with fails the run. |
 
 ## Downloads
 
@@ -40,7 +43,9 @@ the visitor's OS.
 After each MorseCQ release, update the hard-coded `1.0.1` links, sizes, date and
 the `#sums` block in `src/index.html` (`gh release view -R agentx-icu/morsecq
 --json assets` has all of them). When a release changes its asset naming,
-update the `data-asset` / `data-file` attributes too.
+update the `data-asset` / `data-file` attributes too. Then run
+`GITHUB_TOKEN=$(gh auth token) python3 tool/check_release.py`; it lists anything
+still out of date. The `check` workflow runs the same script every day.
 
 ## Preview locally
 
@@ -68,6 +73,21 @@ done
 
 Desktop frames are 1280×645 and phone frames 414×900; if that changes, update
 the `width` / `height` attributes in `src/index.html`.
+
+## Social preview
+
+`og:image` is `assets/img/{en,zh}/og.jpg` (1200×630), a screenshot of
+`tool/og.html?lang=en` / `?lang=zh` at that viewport. Re-render it after changing
+the template or `phone-reference.jpg`, for example with Playwright:
+
+```js
+const page = await (await chromium.launch()).newPage({ viewport: { width: 1200, height: 630 } });
+for (const l of ['en', 'zh']) {
+  await page.goto(`file://${process.cwd()}/tool/og.html?lang=${l}`);
+  await page.waitForLoadState('networkidle');
+  await page.screenshot({ path: `assets/img/${l}/og.jpg`, type: 'jpeg', quality: 86 });
+}
+```
 
 ## Deployment
 
