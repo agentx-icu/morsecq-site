@@ -52,11 +52,16 @@
     $('.lb-close', box).setAttribute('aria-label', t('Close', '关闭'));
     $('.lb-prev', box).setAttribute('aria-label', t('Previous', '上一张'));
     $('.lb-next', box).setAttribute('aria-label', t('Next', '下一张'));
+    // The caption is the image's alt text, or else its figure's caption.
+    var caption = function (img) {
+      var fig = img.closest('figure'), cap = fig && $('figcaption', fig);
+      return img.alt || (cap ? cap.textContent.trim() : '');
+    };
     var show = function (i) {
       at = (i + group.length) % group.length;
       boxImg.src = group[at].currentSrc || group[at].src;
-      boxImg.alt = group[at].alt;
-      boxCap.textContent = group[at].alt;
+      boxImg.alt = caption(group[at]);
+      boxCap.textContent = boxImg.alt;
       box.classList.toggle('single', group.length < 2);
     };
     var step = function (d) { if (group.length > 1) show(at + d); };
