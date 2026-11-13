@@ -1,8 +1,7 @@
 name: check
 
-# Builds the site and checks the page's static release fallback against the
-# latest MorseCQ release. The daily run catches a new release that the page
-# has not been updated for.
+# Checks the generated pages and the static release fallback against the latest
+# MorseCQ release. The daily run catches a release the page has not caught up with.
 on:
   push:
     branches: [master]
@@ -19,7 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python3 tool/build.py --out _site
+      - name: Generated site files are up to date
+        run: python3 tool/build.py --check
       - run: python3 tool/check_release.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

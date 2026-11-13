@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MorseCQ</title>
+<link rel="canonical" href="https://morsecq.agentx.icu/en/">
+<link rel="alternate" hreflang="en" href="https://morsecq.agentx.icu/en/">
+<link rel="alternate" hreflang="zh-CN" href="https://morsecq.agentx.icu/zh/">
+<link rel="alternate" hreflang="x-default" href="https://morsecq.agentx.icu/">
+<link rel="icon" type="image/png" href="assets/img/favicon-64.png">
+<script>
+  // Send the visitor to their language: ?lang=, then their last choice, then the browser.
+  (function () {
+    var m = /[?&]lang=(en|zh)\b/.exec(location.search), l = m && m[1];
+    try { l = l || localStorage.getItem('morsecq-lang'); } catch (e) {}
+    if (!l) l = /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+    location.replace(l + '/' + location.hash);
+  })();
+</script>
+<style>
+  body { font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+         background: #f6f8f7; color: #13261f; display: grid; place-items: center; min-height: 100vh; margin: 0; }
+  a { color: #0e6150; margin: 0 12px; font-weight: 600; }
+  @media (prefers-color-scheme: dark) { body { background: #0e1513; color: #e3ece8; } a { color: #5fd0ad; } }
+</style>
+</head>
+<body>
+  <p>MorseCQ — <a href="en/" hreflang="en">English</a><a href="zh/" hreflang="zh-CN" lang="zh-CN">中文</a></p>
+</body>
+</html>

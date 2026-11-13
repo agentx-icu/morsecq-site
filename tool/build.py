@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the site into _site/: one page per language plus a root redirect.
+"""Generate one page per language, a root redirect and crawler files.
 
 src/index.html is written bilingually: every string appears as a pair of
 <span lang="en">…</span><span lang="zh">…</span>, and attribute text carries its
@@ -8,7 +8,7 @@ pair and writes /en/index.html and /zh/index.html, each a plain single-language
 page with its own <html lang>, title, description, canonical URL and hreflang
 links. The root /index.html only redirects to the visitor's language.
 
-Usage: python3 tool/build.py [--out _site]
+Usage: python3 tool/build.py [--write | --check | --out _site]
 """
 import argparse
 import json
@@ -171,7 +171,8 @@ def render(src, lang):
     # Pages live one level down.
     out = re.sub(r'(href|src)="assets/', r'\1="../assets/', out)
     out = re.sub(r'href="(en|zh)/"', r'href="../\1/"', out)
-    return out
+    # Removing standalone translations can leave lines containing only indent.
+    return re.sub(r'(?m)^[ \t]+$', '', out)
 
 
 ROOT_PAGE = """<!doctype html>
@@ -265,24 +266,47 @@ def sitemap():
     return SITEMAP.format(urls='\n'.join(f'  <url>\n    <loc>{SITE}/{p}/</loc>{alts}\n  </url>' for p in ('en', 'zh')))
 
 
+def site_files(src):
+    return {
+        'index.html': ROOT_PAGE.format(site=SITE),
+        **{f'{lang}/index.html': render(src, lang) for lang in LANGS},
+        '404.html': NOT_FOUND.format(),
+        'sitemap.xml': sitemap(),
+        'robots.txt': f'User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n',
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--out', default=str(ROOT / '_site'))
-    out = Path(ap.parse_args().out)
+    mode = ap.add_mutually_exclusive_group()
+    mode.add_argument('--out', type=Path, default=ROOT / '_site', help='build a deployable copy (default: _site/)')
+    mode.add_argument('--write', action='store_true', help='refresh the generated files in the repository')
+    mode.add_argument('--check', action='store_true', help='check the repository files without modifying them')
+    args = ap.parse_args()
 
     src = (ROOT / 'src' / 'index.html').read_text(encoding='utf-8')
-    if out.exists():
-        shutil.rmtree(out)
-    shutil.copytree(ROOT / 'assets', out / 'assets')
-    for lang in LANGS:
-        (out / lang).mkdir(parents=True)
-        (out / lang / 'index.html').write_text(render(src, lang), encoding='utf-8', newline='\n')
-    (out / 'index.html').write_text(ROOT_PAGE.format(site=SITE), encoding='utf-8', newline='\n')
-    (out / '404.html').write_text(NOT_FOUND.format(), encoding='utf-8', newline='\n')
-    (out / 'sitemap.xml').write_text(sitemap(), encoding='utf-8', newline='\n')
-    (out / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n', encoding='utf-8')
-    for f in ('CNAME', '.nojekyll'):
-        shutil.copy(ROOT / f, out / f)
+    files = site_files(src)
+    if args.check:
+        stale = [name for name, content in files.items()
+                 if not (ROOT / name).is_file() or (ROOT / name).read_bytes() != content.encode('utf-8')]
+        if stale:
+            raise SystemExit(f'build: missing or stale files: {", ".join(stale)}. Run python3 tool/build.py --write.')
+        print('generated files are up to date')
+        return
+
+    out = ROOT if args.write else args.out
+    if not args.write:
+        if out.resolve() == ROOT or out.resolve() in ROOT.parents:
+            ap.error('--out cannot replace the repository or a parent directory; use --write')
+        if out.exists():
+            shutil.rmtree(out)
+        shutil.copytree(ROOT / 'assets', out / 'assets')
+        for f in ('CNAME', '.nojekyll'):
+            shutil.copy(ROOT / f, out / f)
+    for name, content in files.items():
+        path = out / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(content.encode('utf-8'))
     print(f'built {out}')
 
 

@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MorseCQ — 离线学习摩尔斯电码</title>
+<meta name="description" content="MorseCQ 是无需账号、无需联网的免费摩尔斯电码训练器。用 Koch 课程、抄收练习和拍发练习学习电码。支持 macOS、Windows、Linux、Android 和 iOS。">
+<link rel="canonical" href="https://morsecq.agentx.icu/zh/">
+<link rel="alternate" hreflang="en" href="https://morsecq.agentx.icu/en/">
+<link rel="alternate" hreflang="zh-CN" href="https://morsecq.agentx.icu/zh/">
+<link rel="alternate" hreflang="x-default" href="https://morsecq.agentx.icu/">
+<link rel="icon" type="image/png" href="../assets/img/favicon-64.png">
+<link rel="apple-touch-icon" href="../assets/img/icon-512.png">
+<meta name="theme-color" content="#137a63">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MorseCQ — 离线学习摩尔斯电码">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:description" content="无需账号、无需联网的摩尔斯电码训练器。免费开源（GPL-3.0）。">
+<meta property="og:url" content="https://morsecq.agentx.icu/zh/">
+<meta property="og:image" content="https://morsecq.agentx.icu/assets/img/zh/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "MorseCQ",
+  "url": "https://morsecq.agentx.icu/zh/",
+  "inLanguage": "zh-CN",
+  "description": "MorseCQ 是无需账号、无需联网的免费摩尔斯电码训练器。用 Koch 课程、抄收练习和拍发练习学习电码。支持 macOS、Windows、Linux、Android 和 iOS。",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "macOS, Windows, Linux, Android, iOS",
+  "softwareVersion": "1.0.1",
+  "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "downloadUrl": "https://morsecq.agentx.icu/zh/#download",
+  "image": "https://morsecq.agentx.icu/assets/img/icon-512.png",
+  "screenshot": "https://morsecq.agentx.icu/assets/img/zh/desktop-learn_home.jpg",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "agentx-icu",
+    "url": "https://github.com/agentx-icu"
+  }
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <img src="../assets/img/icon-512.png" alt="" width="32" height="32">
+      <span>MorseCQ</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#features"><span>功能</span></a>
+      <a href="#try"><span>试一试</span></a>
+      <a href="#screens"><span>截图</span></a>
+      <a href="#download"><span>下载</span></a>
+      <a href="#install"><span>安装</span></a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-act">
+      <a class="lang-btn" href="../en/" hreflang="en" lang="en" data-set-lang="en" title="Switch to English">EN</a>
+      <a class="gh" href="https://github.com/agentx-icu/morsecq" rel="noopener">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>GitHub</span>
+      </a>
+      <button class="menu-btn" type="button" id="menuBtn" aria-controls="navLinks" aria-expanded="false" aria-label="菜单" hidden>
+        <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <p class="morse-eyebrow mono rise d1" aria-hidden="true">-.-. --.- &nbsp;-.-. --.- &nbsp;-.-. --.-</p>
+      <h1 class="rise d2">
+
+        <span>离线学习<wbr><em>摩尔斯电码。</em></span>
+      </h1>
+      <p class="lede rise d3">
+
+        <span>MorseCQ 是免费、无需账号的摩尔斯电码训练器。系统的 Koch 课程、抄收练习、拍发练习与模拟通联，全部在你自己的设备上运行，无需联网。</span>
+      </p>
+      <div class="cta rise d4">
+        <a class="btn primary btn-dl" href="#download" id="heroDl">
+          <span class="row">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            <span id="heroDlLabel"><span>下载 MorseCQ</span></span>
+          </span>
+          <small id="heroDlSub" class="mono"><span>v1.0.1 · 全部平台</span></small>
+        </a>
+        <a class="btn ghost" href="#try"><span>在浏览器里听一听 ↓</span></a>
+      </div>
+      <p class="hero-alt rise d5">
+        <a href="#download"><span>全部平台与安装包</span></a> ·
+        <a href="https://github.com/agentx-icu/morsecq" rel="noopener"><span>源代码</span></a> ·
+        <span>摩尔斯聊天：</span><a href="https://ditmesh.agentx.icu/">DitMesh</a>
+      </p>
+      <a class="badge mono rise d5" data-release-link href="https://github.com/agentx-icu/morsecq/releases/tag/v1.0.1" rel="noopener"><b>●</b> <span>最新版本</span> <span data-version>v1.0.1</span> · <span data-release-date>2026-10-11</span></a>
+    </div>
+    <div class="hero-art rise d3" aria-hidden="true">
+      <div class="frame">
+        <div class="bar"><i></i><i></i><i></i><b>MorseCQ</b></div>
+        <img src="../assets/img/zh/desktop-learn_home.jpg" alt="" width="1280" height="645">
+      </div>
+      <img class="phone" src="../assets/img/zh/phone-first_lesson.jpg" alt="" width="414" height="900">
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="wrap stats-in">
+      <div class="stat"><div class="n">42</div><div class="l"><span>节 Koch 课程，从 K M R S U 到勤务符号</span></div></div>
+      <div class="stat"><div class="n">0</div><div class="l"><span>所需的账号、注册或服务器</span></div></div>
+      <div class="stat"><div class="n">10</div><div class="l"><span>种界面语言</span></div></div>
+      <div class="stat"><div class="n">5</div><div class="l"><span>个平台：macOS、Windows、Linux、Android、iOS</span></div></div>
+      <div class="stat"><div class="n">GPL-3.0</div><div class="l"><span>自由开源</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono"><span>01 — 为什么选 MorseCQ</span></p>
+      <h2><span>尊重你的时间，也尊重你的数据</span></h2>
+    </div>
+    <div class="grid4">
+      <div class="hl">
+        <div class="hl-k mono">· − · ·</div>
+        <h3><span>系统地学</span></h3>
+        <p><span>Koch 教学法 + Farnsworth 字间距，42 课，间隔复习与每日计划。</span></p>
+      </div>
+      <div class="hl">
+        <div class="hl-k mono">− · − ·</div>
+        <h3><span>有目标地练习</span></h3>
+        <p><span>先有引导地入门，再独立抄收与拍发，节奏真实、反馈即时。</span></p>
+      </div>
+      <div class="hl">
+        <div class="hl-k mono">− − · −</div>
+        <h3><span>完全离线</span></h3>
+        <p><span>课程、练习、录音与进度都保存在本机。无账号、无统计、无广告。</span></p>
+      </div>
+      <div class="hl">
+        <div class="hl-k mono">· − − ·</div>
+        <h3><span>全平台</span></h3>
+        <p><span>手机、平板与桌面，触屏、键盘或 USB 电键都能用，支持十种语言。</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section id="features" class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono"><span>02 — 功能详解</span></p>
+      <h2>
+
+        <span>从第一个“嘀”到稳定抄收，一应俱全</span>
+      </h2>
+      <p>
+
+        <span>学习、练习、模拟通联、参考资料、无线电工具与本地进度，集中在一款专注的训练器中。</span>
+      </p>
+    </div>
+
+    <!-- Learn -->
+    <article class="feat">
+      <div class="feat-copy">
+        <p class="tag"><span>学习</span></p>
+        <h3><span>一套真正的课程，而不只是闪卡</span></h3>
+        <p><span>MorseCQ 按资深报务员推荐的方式教学：从第一天起就以全速发音学字符，只有当逐字符的表现证明你已稳定抄收，才加入新字符。</span></p>
+        <ul class="ticks">
+          <li><span><b>平缓的第一课</b>：先听“嘀”和“嗒”，再学 K 和 M，有引导地辨认与拍发之后再独立抄收。</span></li>
+          <li><span><b>Koch 教学法</b>：42 课，通过挑战推进，依据逐字符的掌握情况。</span></li>
+          <li><span><b>Farnsworth 间距</b>：字符快速，字间留足思考时间。</span></li>
+          <li><span><b>间隔复习与错题本</b>：抄错的字符会在到期时再次出现。</span></li>
+          <li><span><b>每日计划与连续打卡</b>，每天都练一点。</span></li>
+        </ul>
+      </div>
+      <figure class="feat-art">
+        <div class="frame">
+          <div class="bar"><i></i><i></i><i></i><b><span>学习</span></b></div>
+          <img src="../assets/img/zh/desktop-learn_home.jpg" alt="学习页面：今日计划与当前 Koch 课程" loading="lazy" width="1280" height="645">
+        </div>
+      </figure>
+    </article>
+
+    <!-- Drills -->
+    <article class="feat rev">
+      <div class="feat-copy">
+        <p class="tag"><span>抄收与拍发练习</span></p>
+        <h3><span>用耳朵抄收，用手拍发</span></h3>
+        <p><span>抄收练习覆盖你在空中会听到的一切：</span></p>
+        <div class="chips">
+          <span>字符组</span>
+          <span>单字符</span>
+          <span>单词与句子</span>
+          <span>缩略语与 Q 简语</span>
+          <span>数字组</span>
+          <span>呼号</span>
+          <span>易混字符对</span>
+          <span>简短通联</span>
+          <span>比赛交换</span>
+        </div>
+        <p><span>拍发练习支持屏幕上的<b>手键</b>、<b>双桨自动键（iambic）</b>、<b>键盘</b>以及 <b>USB 电键适配器</b>。流式解码器实时显示你拍出的内容，练习小结会告诉你“嗒”是否太短、间隔是否太长。</span></p>
+      </div>
+      <figure class="feat-art phones">
+        <img src="../assets/img/zh/phone-receive_drill.jpg" alt="抄收练习" loading="lazy" width="414" height="900">
+        <img src="../assets/img/zh/phone-guided_send.jpg" alt="引导式拍发：嘀、嗒双桨" loading="lazy" width="414" height="900">
+      </figure>
+    </article>
+
+    <!-- On the air -->
+    <article class="feat">
+      <div class="feat-copy">
+        <p class="tag"><span>走向上机</span></p>
+        <h3><span>真正上机之前，先把第一次通联练熟</span></h3>
+        <p><span>字母听熟之后，MorseCQ 继续带你走：第一次通联、日常闲聊、比赛三条目标路线，以及一个扮演对方电台的模拟器。</span></p>
+        <ul class="ticks">
+          <li><span><b>模拟通联</b>，带准备度提示、纠错与针对性重复。</span></li>
+          <li><span><b>比赛与公园对公园（POTA）交换</b>，节奏贴近真实。</span></li>
+          <li><span><b>整词与整句理解</b>，参照 CW Academy 中级课程方向。</span></li>
+          <li><span><b>辅助练习与独立掌握分开统计</b>，进度数据真实可信。</span></li>
+        </ul>
+      </div>
+      <figure class="feat-art phones">
+        <img src="../assets/img/zh/phone-receive_summary.jpg" alt="抄收练习后的小结" loading="lazy" width="414" height="900">
+        <img src="../assets/img/zh/phone-stats.jpg" alt="统计" loading="lazy" width="414" height="900">
+      </figure>
+    </article>
+
+    <!-- Card grid of the rest -->
+    <div class="cards">
+      <div class="card">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+        <h4><span>麦克风听码</span></h4>
+        <p><span>从现场音频解码摩尔斯电码，电台、练习振荡器或视频都行；也可以在音频工作台里逐段分析录音。</span></p>
+      </div>
+      <div class="card">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 5c-1.1-.35-2.3-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg></div>
+        <h4><span>参考资料与翻译器</span></h4>
+        <p><span>字母、标点、勤务符号、Q 简语和 CW 缩略语，外加支持中文电码的文本 ↔ 摩尔斯双向翻译器。</span></p>
+      </div>
+      <div class="card">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6h-4.6l2.3-2.3-.7-.7L14 6H4a2 2 0 00-2 2v11a2 2 0 002 2h16a2 2 0 002-2V8a2 2 0 00-2-2zm-11 13a4 4 0 110-8 4 4 0 010 8zm11-7h-2v-2h-2v2h-2V9h6v3z"/></svg></div>
+        <h4><span>无线电工具</span></h4>
+        <p><span>梅登黑德网格定位（含距离与方位角）、IARU 频段边界（含天线长度）、CW 速度换算、RST 报告生成器和 UTC 时钟。</span></p>
+      </div>
+      <div class="card">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 13h2v8H3v-8zm4-4h2v12H7V9zm4-6h2v18h-2V3zm4 9h2v9h-2v-9zm4-3h2v12h-2V9z"/></svg></div>
+        <h4><span>统计</span></h4>
+        <p><span>准确率趋势、逐字符掌握度网格、显示你常混淆哪些字符的热力图，以及练习日历。</span></p>
+      </div>
+      <div class="card">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 000 18c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16a5 5 0 005-5c0-4.42-4.03-8-9-8zm-5.5 9a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm3-4a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm3 4a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/></svg></div>
+        <h4><span>五种风格，十种语言</span></h4>
+        <p><span>Modern Calm、Classic Brass、Night Radio、Paper Handbook、Fresh Cartoon，每种都有浅色与深色，界面支持十种语言。</span></p>
+      </div>
+      <div class="card">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></div>
+        <h4><span>声音、振动、闪光</span></h4>
+        <p><span>全平台低延迟侧音、手机振动反馈、所有平台的屏幕闪光，速度、音调与间距随你设置。</span></p>
+      </div>
+      <div class="card">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
+        <h4><span>你的进度，保存在本机</span></h4>
+        <p><span>进度、素材与录音保存在本机，可随时从“我”页面清除；不收集任何个人数据。</span></p>
+      </div>
+      <div class="card">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 2H3a2 2 0 00-2 2v12a2 2 0 002 2h7l-2 3v1h8v-1l-2-3h7a2 2 0 002-2V4a2 2 0 00-2-2zm0 12H3V4h18v10z"/></svg></div>
+        <h4><span>桌面端体验完整</span></h4>
+        <p><span>在 macOS、Windows、Linux 上记住窗口大小，支持关闭到托盘、托盘菜单和快捷键。</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="sec alt">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="eyebrow mono"><span>一次练习</span></p>
+      <h2><span>一次练习是怎么进行的</span></h2>
+    </div>
+    <ol class="flow">
+      <li>
+        <span class="n mono">1</span>
+        <h4><span>你拍发</span></h4>
+        <p><span>打字、点手键、按双桨电键或接上 USB 电键，MorseCQ 把你的拍发解码成文字。</span></p>
+      </li>
+      <li>
+        <span class="n mono">2</span>
+        <h4><span>MorseCQ 评估</span></h4>
+        <p><span>训练器在本机检查节奏、准确率与拍发质量，再把结果写入本地进度。</span></p>
+      </li>
+      <li>
+        <span class="n mono">3</span>
+        <h4><span>你听到反馈</span></h4>
+        <p><span>按你选择的速度和音调回放题目与自己的拍发，然后继续练习。</span></p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ TRY IT ============ -->
+<section id="try" class="sec">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="eyebrow mono"><span>03 — 试一试</span></p>
+      <h2><span>在这里听一听</span></h2>
+      <p><span>输入一段文字，听听 MorseCQ 播放题目时的样子。</span></p>
+    </div>
+    <div class="demo">
+      <div class="demo-row">
+        <input id="demoIn" type="text" maxlength="80" value="CQ CQ DE MORSECQ K" aria-label="要播放的文字">
+        <button class="btn primary" id="demoPlay" type="button">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+          <span class="when-idle"><span>播放</span></span>
+          <span class="when-busy"><span>停止</span></span>
+        </button>
+      </div>
+      <div class="demo-out mono" id="demoOut" aria-live="polite"></div>
+      <div class="demo-ctl">
+        <label><span>速度</span> <b id="wpmV">20</b> WPM
+          <input id="wpm" type="range" min="5" max="40" value="20"></label>
+        <label><span>音调</span> <b id="hzV">600</b> Hz
+          <input id="hz" type="range" min="400" max="900" step="10" value="600"></label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCREENSHOTS ============ -->
+<section id="screens" class="sec alt">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="eyebrow mono"><span>04 — 界面一览</span></p>
+      <h2><span>截图</span></h2>
+      <p><span>均由应用自带的截图流程从 MorseCQ 1.0.1 生成的真实画面，不是效果图。</span></p>
+    </div>
+    <div class="tabs center-tabs" role="tablist" aria-label="截图">
+      <button role="tab" class="tab" id="tab-phone" aria-controls="pane-phone" aria-selected="true" type="button"><span>手机</span></button>
+      <button role="tab" class="tab" id="tab-desktop" aria-controls="pane-desktop" aria-selected="false" tabindex="-1" type="button"><span>桌面</span></button>
+    </div>
+    <div class="gallery phone-g" id="pane-phone" role="tabpanel" aria-labelledby="tab-phone">
+      <figure><img src="../assets/img/zh/phone-first_lesson.jpg" alt="" loading="lazy" width="414" height="900"><figcaption><span>第一课</span></figcaption></figure>
+      <figure><img src="../assets/img/zh/phone-receive_drill.jpg" alt="" loading="lazy" width="414" height="900"><figcaption><span>抄收练习</span></figcaption></figure>
+      <figure><img src="../assets/img/zh/phone-receive_summary.jpg" alt="" loading="lazy" width="414" height="900"><figcaption><span>练习小结</span></figcaption></figure>
+      <figure><img src="../assets/img/zh/phone-guided_send.jpg" alt="" loading="lazy" width="414" height="900"><figcaption><span>引导式拍发</span></figcaption></figure>
+      <figure><img src="../assets/img/zh/phone-send_practice.jpg" alt="" loading="lazy" width="414" height="900"><figcaption><span>拍发练习</span></figcaption></figure>
+      <figure><img src="../assets/img/zh/phone-reference.jpg" alt="" loading="lazy" width="414" height="900"><figcaption><span>参考</span></figcaption></figure>
+      <figure><img src="../assets/img/zh/phone-translator.jpg" alt="" loading="lazy" width="414" height="900"><figcaption><span>翻译器</span></figcaption></figure>
+      <figure><img src="../assets/img/zh/phone-listen.jpg" alt="" loading="lazy" width="414" height="900"><figcaption><span>麦克风听码</span></figcaption></figure>
+      <figure><img src="../assets/img/zh/phone-stats.jpg" alt="" loading="lazy" width="414" height="900"><figcaption><span>统计</span></figcaption></figure>
+      <figure><img src="../assets/img/zh/phone-me.jpg" alt="" loading="lazy" width="414" height="900"><figcaption><span>我的与设置</span></figcaption></figure>
+    </div>
+    <div class="gallery desk-g" id="pane-desktop" role="tabpanel" aria-labelledby="tab-desktop" hidden>
+      <figure><div class="frame"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/img/zh/desktop-learn_home.jpg" alt="" loading="lazy" width="1280" height="645"></div><figcaption><span>学习首页</span></figcaption></figure>
+      <figure><div class="frame"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/img/zh/desktop-stats.jpg" alt="" loading="lazy" width="1280" height="645"></div><figcaption><span>统计</span></figcaption></figure>
+      <figure><div class="frame"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/img/zh/desktop-receive_summary.jpg" alt="" loading="lazy" width="1280" height="645"></div><figcaption><span>练习小结</span></figcaption></figure>
+      <figure><div class="frame"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/img/zh/desktop-reference.jpg" alt="" loading="lazy" width="1280" height="645"></div><figcaption><span>参考</span></figcaption></figure>
+      <figure><div class="frame"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/img/zh/desktop-translator.jpg" alt="" loading="lazy" width="1280" height="645"></div><figcaption><span>翻译器</span></figcaption></figure>
+      <figure><div class="frame"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/img/zh/desktop-listen.jpg" alt="" loading="lazy" width="1280" height="645"></div><figcaption><span>麦克风听码</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOWNLOAD ============ -->
+<section id="download" class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono"><span>05 — 下载</span></p>
+      <h2><span>为你的设备下载 MorseCQ</span></h2>
+      <p><span>免费，无需注册。所有安装包都由 CI 从公开源码构建，发布在 GitHub Releases。</span></p>
+    </div>
+    <div class="dl-meta mono">
+      <span><span>版本</span> <b data-version>v1.0.1</b></span>
+      <span><span>发布于</span> <span data-release-date>2026-10-11</span></span>
+      <a data-release-link href="https://github.com/agentx-icu/morsecq/releases/tag/v1.0.1" rel="noopener"><span>更新说明 ↗</span></a>
+      <a href="https://github.com/agentx-icu/morsecq/releases" rel="noopener"><span>历史版本 ↗</span></a>
+    </div>
+
+    <div class="dl-grid">
+      <div class="os" id="os-macos" data-os="macos">
+        <div class="os-h">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8s1.9.8 3.2.8c1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.4-.9-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>
+          <h3>macOS</h3><span class="yours"><span>你的设备</span></span>
+        </div>
+        <p class="req"><span>macOS 13 及以上 · Universal2：Apple 芯片与 Intel</span></p>
+        <div class="pkgs">
+          <a class="pkg" data-asset="macos-universal2.pkg" href="https://github.com/agentx-icu/morsecq/releases/download/v1.0.1/morsecq-1.0.1-macos-universal2.pkg">
+            <span class="pi"><span class="pn"><span>安装包（.pkg）</span></span><span class="pf">morsecq-1.0.1-macos-universal2.pkg</span></span><span class="ps">23.4 MB</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+          <a class="pkg" data-asset="macos-universal2.zip" href="https://github.com/agentx-icu/morsecq/releases/download/v1.0.1/morsecq-1.0.1-macos-universal2.zip">
+            <span class="pi"><span class="pn"><span>免安装版（.zip）</span></span><span class="pf">morsecq-1.0.1-macos-universal2.zip</span></span><span class="ps">23.5 MB</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+        </div>
+        <p class="note"><span>尚未公证，见<a href="#install">安装指南</a>。</span></p>
+      </div>
+
+      <div class="os" id="os-windows" data-os="windows">
+        <div class="os-h">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5l7.5-1v7H3zM11.5 4.4L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.3z"/></svg>
+          <h3>Windows</h3><span class="yours"><span>你的设备</span></span>
+        </div>
+        <p class="req"><span>Windows 10 / 11 · x64</span></p>
+        <div class="pkgs">
+          <a class="pkg" data-asset="windows-x64.msi" href="https://github.com/agentx-icu/morsecq/releases/download/v1.0.1/morsecq-1.0.1-windows-x64.msi">
+            <span class="pi"><span class="pn"><span>安装包（.msi）</span></span><span class="pf">morsecq-1.0.1-windows-x64.msi</span></span><span class="ps">15.2 MB</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+          <a class="pkg" data-asset="windows-x64.zip" href="https://github.com/agentx-icu/morsecq/releases/download/v1.0.1/morsecq-1.0.1-windows-x64.zip">
+            <span class="pi"><span class="pn"><span>免安装版（.zip）</span></span><span class="pf">morsecq-1.0.1-windows-x64.zip</span></span><span class="ps">14.4 MB</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+        </div>
+        <p class="note"><span>尚未签名，SmartScreen 可能要求确认。</span></p>
+      </div>
+
+      <div class="os" id="os-linux" data-os="linux">
+        <div class="os-h">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-2.2 0-3.6 1.8-3.6 4.4 0 1.3.3 2.2-.4 3.4-.9 1.5-2.9 3.9-2.9 6.6 0 .6.1 1.2.4 1.7-.8.4-1.9.6-1.9 1.5 0 1.2 2.1 1.1 3.3 1.6.9.4 1.6.8 2.4.8.9 0 1.4-.6 1.8-1h1.8c.4.4.9 1 1.8 1 .8 0 1.5-.4 2.4-.8 1.2-.5 3.3-.4 3.3-1.6 0-.9-1.1-1.1-1.9-1.5.3-.5.4-1.1.4-1.7 0-2.7-2-5.1-2.9-6.6-.7-1.2-.4-2.1-.4-3.4C15.6 3.8 14.2 2 12 2zm-1.6 4.2c.4 0 .7.5.7 1.1 0 .6-.3 1.1-.7 1.1s-.7-.5-.7-1.1c0-.6.3-1.1.7-1.1zm3.2 0c.4 0 .7.5.7 1.1 0 .6-.3 1.1-.7 1.1s-.7-.5-.7-1.1c0-.6.3-1.1.7-1.1zM12 9.3c.9 0 2 .6 2 1 0 .5-1.1 1.2-2 1.2s-2-.7-2-1.2c0-.4 1.1-1 2-1z"/></svg>
+          <h3>Linux</h3><span class="yours"><span>你的设备</span></span>
+        </div>
+        <p class="req"><span>x86_64 · glibc 不低于 Ubuntu 24.04</span></p>
+        <div class="pkgs">
+          <a class="pkg" data-asset="linux-x86_64.deb" href="https://github.com/agentx-icu/morsecq/releases/download/v1.0.1/morsecq-1.0.1-linux-x86_64.deb">
+            <span class="pi"><span class="pn">.deb · Debian / Ubuntu</span><span class="pf">morsecq-1.0.1-linux-x86_64.deb</span></span><span class="ps">14.8 MB</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+          <a class="pkg" data-asset="linux-x86_64.rpm" href="https://github.com/agentx-icu/morsecq/releases/download/v1.0.1/morsecq-1.0.1-linux-x86_64.rpm">
+            <span class="pi"><span class="pn">.rpm · Fedora / openSUSE</span><span class="pf">morsecq-1.0.1-linux-x86_64.rpm</span></span><span class="ps">9.7 MB</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+          <a class="pkg" data-asset="linux-x86_64.tar.gz" href="https://github.com/agentx-icu/morsecq/releases/download/v1.0.1/morsecq-1.0.1-linux-x86_64.tar.gz">
+            <span class="pi"><span class="pn"><span>免安装版（.tar.gz）</span></span><span class="pf">morsecq-1.0.1-linux-x86_64.tar.gz</span></span><span class="ps">20.9 MB</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+        </div>
+      </div>
+
+      <div class="os" id="os-android" data-os="android">
+        <div class="os-h">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 4.2L5.9 2.1l.6-.4 1.4 2.2A8 8 0 0 1 12 3c1.5 0 2.9.3 4.1.9l1.4-2.2.6.4-1.3 2.1C19.2 5.5 20.7 7.8 21 10.5H3c.3-2.7 1.8-5 4.2-6.3zM8.5 7.5a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8zm7 0a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8zM3 12h18v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <h3>Android</h3><span class="yours"><span>你的设备</span></span>
+        </div>
+        <p class="req"><span>Android 7.0 及以上 · arm64-v8a、armeabi-v7a、x86_64</span></p>
+        <div class="pkgs">
+          <a class="pkg" data-asset="android.apk" href="https://github.com/agentx-icu/morsecq/releases/download/v1.0.1/morsecq-1.0.1-android.apk">
+            <span class="pi"><span class="pn">APK</span><span class="pf">morsecq-1.0.1-android.apk</span></span><span class="ps">71.0 MB</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+          <a class="pkg" data-asset="android.aab" href="https://github.com/agentx-icu/morsecq/releases/download/v1.0.1/morsecq-1.0.1-android.aab">
+            <span class="pi"><span class="pn"><span>应用包（.aab，用于应用商店）</span></span><span class="pf">morsecq-1.0.1-android.aab</span></span><span class="ps">52.5 MB</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+        </div>
+      </div>
+
+      <div class="os" id="os-ios" data-os="ios">
+        <div class="os-h">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3" class="outline"/><rect x="10" y="18.2" width="4" height="1.4" rx=".7"/></svg>
+          <h3>iOS &amp; iPadOS</h3><span class="yours"><span>你的设备</span></span>
+        </div>
+        <p class="req"><span>iOS / iPadOS 14 及以上 · 未签名构建</span></p>
+        <div class="pkgs">
+          <a class="pkg" data-asset="ios-unsigned.ipa" href="https://github.com/agentx-icu/morsecq/releases/download/v1.0.1/morsecq-1.0.1-ios-unsigned.ipa">
+            <span class="pi"><span class="pn"><span>未签名 .ipa</span></span><span class="pf">morsecq-1.0.1-ios-unsigned.ipa</span></span><span class="ps">10.1 MB</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+        </div>
+        <p class="note"><span>暂未上架 App Store，需自行签名或侧载（如 AltStore、Sideloadly）。</span></p>
+      </div>
+
+      <div class="os" id="os-source">
+        <div class="os-h">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="outline" d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>
+          <h3><span>源代码</span></h3>
+        </div>
+        <p class="req">GPL-3.0 · Flutter 3.41.9 · Dart 3.11</p>
+        <div class="pkgs">
+          <a class="pkg" href="https://github.com/agentx-icu/morsecq" rel="noopener">
+            <span class="pi"><span class="pn">agentx-icu/morsecq</span><span class="pf"><span>GitHub 上的应用源码</span></span></span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          <a class="pkg" href="#install" data-guide="source">
+            <span class="pi"><span class="pn"><span>从源码构建</span></span><span class="pf"><span>见安装指南</span></span></span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <details class="verify">
+      <summary><span>校验下载文件（SHA-256）</span></summary>
+      <div class="vb">
+        <p><span>每个版本都附带 <a data-sums-link href="https://github.com/agentx-icu/morsecq/releases/download/v1.0.1/SHA256SUMS">SHA256SUMS</a> 文件。将它与你下载文件的哈希比对：macOS 用 <code>shasum -a 256 &lt;文件&gt;</code>，Linux 用 <code>sha256sum &lt;文件&gt;</code>，PowerShell 用 <code>Get-FileHash &lt;文件&gt;</code>。</span></p>
+        <pre class="sums mono" id="sums">9bed985ce332cb164115b6d1b019d5faccc44d0ba3dc650e05cf47f071dee909  morsecq-1.0.1-android.aab
+4e3578ad825c4c32c6abe6091a458d86e4d5e9aba0b31fc6bec3119fc3bcced3  morsecq-1.0.1-android.apk
+c15dcdc553ad7e8de6d7abab1352cbb57134824ed78f629392947cf3300182a5  morsecq-1.0.1-ios-unsigned.ipa
+eecc7eceafe699bfa25350f57291bb0197fdbc7ab0d37360886944a109505521  morsecq-1.0.1-linux-x86_64.deb
+56785ee857e5ae8af89246c541d3cbedff60040f8b916ebea6b9b210498d0232  morsecq-1.0.1-linux-x86_64.rpm
+67a32fde0513e8dded9389016d65efe24f1c83032484373991fee19643493269  morsecq-1.0.1-linux-x86_64.tar.gz
+672197a7321d6049c4a667e0148c235d441df74f6a76b3115fe68f159afd92b8  morsecq-1.0.1-macos-universal2.pkg
+0d4b790d1001234798600f04dada2c5b17ae26f2a9f3dfb8e09a0c19b2a0bfe5  morsecq-1.0.1-macos-universal2.zip
+363d420c116d45cde06d292f71f7a7a30e8693ba237522d83205fb595d981f10  morsecq-1.0.1-windows-x64.msi
+2b8f83f1ab36d4c245a104050d73bd5dd9680a32289ea8740df63fb5cee9b903  morsecq-1.0.1-windows-x64.zip</pre>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ INSTALL ============ -->
+<section id="install" class="sec alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono"><span>06 — 安装与上手</span></p>
+      <h2><span>几分钟就能开始练习</span></h2>
+      <p><span>安装包尚未代码签名或公证，系统会要求你确认一次。各平台的做法如下。</span></p>
+    </div>
+    <div class="guide">
+      <div class="tabs" role="tablist" id="guideTabs" aria-label="安装指南">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="i-macos" id="it-macos" data-key="macos" type="button">macOS</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="i-windows" id="it-windows" data-key="windows" tabindex="-1" type="button">Windows</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="i-linux" id="it-linux" data-key="linux" tabindex="-1" type="button">Linux</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="i-android" id="it-android" data-key="android" tabindex="-1" type="button">Android</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="i-ios" id="it-ios" data-key="ios" tabindex="-1" type="button">iOS</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="i-source" id="it-source" data-key="source" tabindex="-1" type="button"><span>源码构建</span></button>
+      </div>
+
+      <div class="panel" id="i-macos" role="tabpanel" tabindex="0" aria-labelledby="it-macos">
+        <ol class="steps">
+          <li><span>下载 <b>.pkg</b>。它是通用构建，Apple 芯片与 Intel Mac 用同一个文件。</span></li>
+          <li><span>按住 Control 点按 .pkg 选择<b>打开</b>，或前往<b>系统设置 → 隐私与安全性</b>点击<b>仍要打开</b>。MorseCQ 会安装到 <code>/Applications</code>。</span></li>
+          <li><span>从启动台或聚焦搜索打开 <b>MorseCQ</b>。只有在开始实时解码时才会请求麦克风权限。</span></li>
+        </ol>
+        <pre class="term mono"><i># or install from Terminal</i>
+<b>sudo installer</b> -pkg ~/Downloads/<span data-file="macos-universal2.pkg">morsecq-1.0.1-macos-universal2.pkg</span> -target /</pre>
+      </div>
+
+      <div class="panel" id="i-windows" role="tabpanel" tabindex="0" aria-labelledby="it-windows" hidden>
+        <ol class="steps">
+          <li><span>下载 <b>.msi</b> 安装包；想要免安装版就下载 <b>.zip</b>。</span></li>
+          <li><span>双击安装包。若 SmartScreen 提示“Windows 已保护你的电脑”，点击<b>更多信息 → 仍要运行</b>。</span></li>
+          <li><span>从开始菜单启动 <b>MorseCQ</b>。</span></li>
+        </ol>
+        <pre class="term mono"><i># optional: silent install from PowerShell</i>
+<b>msiexec</b> /i <span data-file="windows-x64.msi">morsecq-1.0.1-windows-x64.msi</span> /qn</pre>
+      </div>
+
+      <div class="panel" id="i-linux" role="tabpanel" tabindex="0" aria-labelledby="it-linux" hidden>
+        <ol class="steps">
+          <li><span>Debian、Ubuntu 选 <b>.deb</b>；Fedora、openSUSE 选 <b>.rpm</b>；不想安装就用 <b>.tar.gz</b>。</span></li>
+          <li><span>用包管理器安装，依赖会自动装好：</span></li>
+        </ol>
+        <pre class="term mono"><i># Debian / Ubuntu</i>
+<b>sudo apt install</b> ./<span data-file="linux-x86_64.deb">morsecq-1.0.1-linux-x86_64.deb</span>
+
+<i># Fedora / openSUSE</i>
+<b>sudo dnf install</b> ./<span data-file="linux-x86_64.rpm">morsecq-1.0.1-linux-x86_64.rpm</span>
+
+<i># portable</i>
+<b>tar</b> xzf <span data-file="linux-x86_64.tar.gz">morsecq-1.0.1-linux-x86_64.tar.gz</span> &amp;&amp; ./morsecq/morsecq</pre>
+        <ol class="steps" start="3">
+          <li><span>从应用菜单启动 <b>MorseCQ</b>。</span></li>
+        </ol>
+      </div>
+
+      <div class="panel" id="i-android" role="tabpanel" tabindex="0" aria-labelledby="it-android" hidden>
+        <ol class="steps">
+          <li><span>在手机上下载 <b>APK</b>，或从电脑传到手机。</span></li>
+          <li><span>打开它。若系统提示，允许浏览器或文件管理器<b>安装未知应用</b>。</span></li>
+          <li><span>该 APK 使用 debug 签名，将来的商店版本无法直接覆盖升级。</span></li>
+        </ol>
+        <pre class="term mono"><i># or sideload with adb</i>
+<b>adb install</b> <span data-file="android.apk">morsecq-1.0.1-android.apk</span></pre>
+      </div>
+
+      <div class="panel" id="i-ios" role="tabpanel" tabindex="0" aria-labelledby="it-ios" hidden>
+        <ol class="steps">
+          <li><span>MorseCQ 暂未上架 App Store。请下载<b>未签名的 .ipa</b>。</span></li>
+          <li><span>用 <b>AltStore</b>、<b>Sideloadly</b> 等侧载工具配合你的 Apple ID 签名安装，或用 Xcode 从源码构建。</span></li>
+          <li><span>需要 iOS 或 iPadOS 14 及以上。</span></li>
+        </ol>
+      </div>
+
+      <div class="panel" id="i-source" role="tabpanel" tabindex="0" aria-labelledby="it-source" hidden>
+        <ol class="steps">
+          <li><span>安装 <b>Flutter 3.41.9</b>（Dart 3.11）以及所在平台的构建工具。</span></li>
+          <li><span>在仓库根目录解析 Pub 工作区，然后运行应用：</span></li>
+        </ol>
+        <pre class="term mono"><b>git clone</b> https://github.com/agentx-icu/morsecq.git
+<b>cd</b> morsecq
+<b>dart pub get</b> --enforce-lockfile
+<b>cd</b> apps/morsecq &amp;&amp; <b>flutter run</b></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="sec">
+  <div class="wrap narrow">
+    <div class="sec-head center">
+      <p class="eyebrow mono"><span>07 — 常见问题</span></p>
+      <h2><span>常见问题</span></h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary><span>需要业余无线电执照吗？</span></summary>
+        <p><span>不需要。MorseCQ 不会发射任何信号，任何人都可以学习。如果你持有执照，它也是在两次上机之间保持 CW 手感的好办法。</span></p>
+      </details>
+      <details>
+        <summary><span>需要账号或联网吗？</span></summary>
+        <p><span>都不需要。打开应用即可开始学习，课程、练习、素材与进度都在本机运行。</span></p>
+      </details>
+      <details>
+        <summary><span>摩尔斯聊天在哪里？</span></summary>
+        <p><span>MorseCQ 是离线训练器，不含聊天或通话。摩尔斯聊天请使用独立应用 <a href="https://ditmesh.agentx.icu/">DitMesh</a>。</span></p>
+      </details>
+      <details>
+        <summary><span>我的数据会怎样处理？</span></summary>
+        <p><span>数据只保存在你的设备上。MorseCQ 不收集任何个人数据，没有统计和广告。“我 → 清除学习数据”可删除进度、素材与录音。详见<a href="https://agentx-icu.github.io/morsecq/privacy.html">隐私政策</a>。</span></p>
+      </details>
+      <details>
+        <summary><span>为什么安装时系统会弹出警告？</span></summary>
+        <p><span>1.0.1 安装包尚未代码签名或公证。<a href="#install">安装指南</a>说明了各平台如何确认。可用 <a data-sums-link href="https://github.com/agentx-icu/morsecq/releases/download/v1.0.1/SHA256SUMS">SHA256SUMS</a> 校验任何下载文件。</span></p>
+      </details>
+      <details>
+        <summary><span>应用支持哪些语言？</span></summary>
+        <p><span>十种：英语、简体中文、繁体中文、日语、韩语、德语、法语、西班牙语、葡萄牙语和俄语。翻译器还支持中文电码。</span></p>
+      </details>
+      <details>
+        <summary><span>真的免费吗？</span></summary>
+        <p><span>是的。MorseCQ 是遵循 GNU GPL v3.0 的自由软件，欢迎到 <a href="https://github.com/agentx-icu/morsecq/issues">GitHub</a> 提交问题和贡献代码。</span></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top">
+          <img src="../assets/img/icon-512.png" alt="" width="28" height="28">
+          <span>MorseCQ</span>
+        </a>
+        <p class="blurb"><span>无需账号、无需联网的全平台摩尔斯电码训练器。</span></p>
+        <p class="mono muted small" aria-hidden="true">-- --- .-. ... . -.-. --.-</p>
+      </div>
+      <div>
+        <h4><span>产品</span></h4>
+        <ul>
+          <li><a href="#features"><span>功能</span></a></li>
+          <li><a href="#try"><span>试一试</span></a></li>
+          <li><a href="#download"><span>下载</span></a></li>
+          <li><a href="#install"><span>安装指南</span></a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><span>项目</span></h4>
+        <ul>
+          <li><a href="https://github.com/agentx-icu/morsecq" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/agentx-icu/morsecq/releases" rel="noopener"><span>版本发布</span></a></li>
+          <li><a href="https://github.com/agentx-icu/morsecq/issues" rel="noopener"><span>反馈问题</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><span>条款与帮助</span></h4>
+        <ul>
+          <li><a href="https://agentx-icu.github.io/morsecq/privacy.html"><span>隐私政策</span></a></li>
+          <li><a href="https://agentx-icu.github.io/morsecq/terms.html"><span>使用条款</span></a></li>
+          <li><a href="https://agentx-icu.github.io/morsecq/support.html"><span>支持</span></a></li>
+          <li><a href="https://ditmesh.agentx.icu/">DitMesh</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 <span>MorseCQ 贡献者</span> · GPL-3.0</span>
+      <span class="sp"></span>
+      <span><a href="../en/" hreflang="en" data-set-lang="en">English</a> · <a href="../zh/" hreflang="zh-CN" data-set-lang="zh">简体中文</a></span>
+      <span><span>本页面无 Cookie、无追踪。</span></span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="../assets/main.js" defer></script>
+</body>
+</html>

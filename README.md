@@ -17,7 +17,10 @@ bilingual source into the two pages. Morse chat is provided by DitMesh.
 | Path | What |
 |------|------|
 | `src/index.html` | The page source. Every string appears twice, `<span lang="en">` and `<span lang="zh">`; attribute text has a `data-alt-zh` / `data-label-zh` twin. Edit both languages here. |
-| `tool/build.py` | Writes `_site/`: `en/index.html` and `zh/index.html` (one language each, with their own `<html lang>`, title, description, canonical and hreflang links), a `SoftwareApplication` JSON-LD block per page, the root redirect, a bilingual `404.html`, `sitemap.xml`, `robots.txt` and the assets. Fails loudly if the template drifts. |
+| `index.html` | Generated homepage that redirects visitors to their preferred language. |
+| `en/index.html`, `zh/index.html` | Generated pages, each with its own language, search metadata and `SoftwareApplication` JSON-LD. |
+| `404.html`, `sitemap.xml`, `robots.txt` | Generated bilingual error page and crawler files. |
+| `tool/build.py` | Regenerates the checked-in site files with `--write`, verifies them with `--check`, or builds a deployable copy in `_site/` by default. |
 | `tool/check_release.py` | Fails when the static release fallback in `src/index.html` (version, date, links, file names, sizes, SHA-256 list) no longer matches the latest release. |
 | `tool/og.html` | Template for the 1200×630 social preview images `assets/img/{en,zh}/og.jpg`. |
 | `assets/style.css` | Styles, light and dark (follows the system). |
@@ -25,7 +28,7 @@ bilingual source into the two pages. Morse chat is provided by DitMesh.
 | `assets/img/{en,zh}/` | MorseCQ 1.0.1 screenshots copied from `morsecq/doc/screenshots/{macos,ios}/<lang>/` (JPEG, phones scaled to 900 px). |
 | `CNAME` | Custom domain for GitHub Pages. |
 | `.github/workflows/pages.yml` | Runs `tool/build.py` and deploys `_site/` to GitHub Pages on every push to `master`. |
-| `.github/workflows/check.yml` | Builds the site and runs `tool/check_release.py` on pushes, pull requests and daily, so a new MorseCQ release the page has not caught up with fails the run. |
+| `.github/workflows/check.yml` | Checks the generated files and runs `tool/check_release.py` on pushes, pull requests and daily. |
 
 ## Downloads
 
@@ -45,14 +48,18 @@ the `#sums` block in `src/index.html` (`gh release view -R agentx-icu/morsecq
 --json assets` has all of them). When a release changes its asset naming,
 update the `data-asset` / `data-file` attributes too. Then run
 `GITHUB_TOKEN=$(gh auth token) python3 tool/check_release.py`; it lists anything
-still out of date. The `check` workflow runs the same script every day.
+still out of date. Regenerate the site files before committing. The `check`
+workflow runs the same script every day.
 
 ## Preview locally
 
 ```bash
-python3 tool/build.py && python3 -m http.server 8000 --directory _site
-# http://localhost:8000/en/  ·  http://localhost:8000/zh/
+python3 -m http.server 8000
+# http://localhost:8000/  ·  /en/  ·  /zh/
 ```
+
+After editing `src/index.html` or the generator, run `python3 tool/build.py --write`
+and commit the updated generated files. Edit the template for content changes.
 
 ## Refreshing screenshots
 
